@@ -1,46 +1,55 @@
-# Astro Starter Kit: Basics
+# Le Salon 23 ✂️
 
-```sh
-npm create astro@latest -- --template basics
+Website for **Le Salon 23**, a hair salon.
+
+## 📋 About
+
+This website showcases the services, pricing, and contact information for Le Salon 23 hair salon.
+
+## 🚀 Installation
+
+```bash
+# Install dependencies
+npm install
+
+# Start the development server
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+The site will be available at `http://localhost:4321`
 
-## 🚀 Project Structure
+## 📁 Project Structure
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+```
+src/
+├── components/    # Reusable components
+├── layouts/       # Page layouts
+├── pages/         # Site pages
+├── styles/        # CSS files
+└── assets/        # Images and resources
+public/            # Static files (favicon, etc.)
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## 🛠️ Commands
 
-## 🧞 Commands
+| Command           | Description                              |
+| :---------------- | :--------------------------------------- |
+| `npm run dev`     | Start the development server             |
+| `npm run build`   | Build the site for production            |
+| `npm run preview` | Preview the site before deployment       |
 
-All commands are run from the root of the project, from a terminal:
+## 🌐 Deployment
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+```bash
+npm run build
+```
 
-## 👀 Want to learn more?
+The generated files will be in the `dist/` folder.
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## 📞 Contact
+
+For any questions about the website, contact the development team.
+
+---
+
+Built with [Astro](https://astro.build)
