@@ -43,3 +43,16 @@
   --font-body: 'Outfit', sans-serif;
 }
 
+/* === STYLES GLOBAUX === */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: theme(colors.neutral.800);
+  background-color: theme(colors.neutral.50);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
