@@ -1,0 +1,183 @@
+---
+import { siteConfig, navigationConfig } from "../config/site.config";
+import Button from "./Button.astro";
+---
+
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <nav class="container-custom">
+    <div class="flex items-center justify-between h-20">
+      <!-- Logo -->
+      <a 
+        href="#hero" 
+        class="flex items-center gap-2 group"
+        aria-label="Retour à l'accueil"
+      >
+        <span class="text-2xl md:text-3xl font-heading font-semibold text-white group-hover:text-primary-300 transition-colors">
+          {siteConfig.name}
+        </span>
+      </a>
+
+      <!-- Navigation Desktop -->
+      <div class="hidden lg:flex items-center gap-1">
+        {navigationConfig.map((item) => (
+          <a
+            href={item.href}
+            class="nav-link px-4 py-2 text-white/90 hover:text-primary-300 font-medium transition-colors relative group"
+          >
+            {item.label}
+            <span class="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary-400 transition-all duration-300 group-hover:w-3/4"></span>
+          </a>
+        ))}
+      </div>
+
+      <!-- CTA Desktop -->
+      <div class="hidden lg:block">
+        <Button href={siteConfig.bookingUrl} variant="primary" size="sm">
+          Réserver
+        </Button>
+      </div>
+
+      <!-- Bouton Menu Mobile -->
+      <button
+        id="mobile-menu-button"
+        class="lg:hidden flex flex-col gap-1.5 p-2 group"
+        aria-label="Ouvrir le menu"
+        aria-expanded="false"
+      >
+        <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+        <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300"></span>
+        <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Menu Mobile -->
+  <div
+    id="mobile-menu"
+    class="lg:hidden fixed inset-0 top-20 bg-secondary-900/98 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out"
+  >
+    <div class="flex flex-col items-center justify-center h-full gap-6 p-8">
+      {navigationConfig.map((item, index) => (
+        <a
+          href={item.href}
+          class="mobile-nav-link text-2xl font-heading text-white hover:text-primary-300 transition-colors opacity-0"
+          style={`animation-delay: ${index * 0.1}s`}
+        >
+          {item.label}
+        </a>
+      ))}
+      <div class="mt-8 opacity-0 mobile-nav-link" style="animation-delay: 0.6s">
+        <Button href={siteConfig.bookingUrl} variant="primary" size="lg">
+          Réserver maintenant
+        </Button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  #navbar {
+    background: transparent;
+  }
+
+  #navbar.scrolled {
+    background: var(--color-secondary-900);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  }
+
+  #navbar.scrolled .nav-link {
+    color: var(--color-accent-50);
+  }
+
+  /* Animation du menu hamburger */
+  #mobile-menu-button.active .hamburger-line:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #mobile-menu-button.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  #mobile-menu-button.active .hamburger-line:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Menu mobile ouvert */
+  #mobile-menu.open {
+    transform: translateX(0);
+  }
+
+  #mobile-menu.open .mobile-nav-link {
+    animation: slideIn 0.4s ease-out forwards;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById("navbar");
+  const mobileMenuButton = document.getElementById("mobile-menu-button");
+  const mobileMenu = document.getElementById("mobile-menu");
+  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+
+  // Scroll effect
+  function handleScroll() {
+    if (window.scrollY > 50) {
+      navbar?.classList.add("scrolled");
+    } else {
+      navbar?.classList.remove("scrolled");
+    }
+  }
+
+  window.addEventListener("scroll", handleScroll);
+  handleScroll(); // Check on load
+
+  // Mobile menu toggle
+  mobileMenuButton?.addEventListener("click", () => {
+    const isOpen = mobileMenu?.classList.contains("open");
+    
+    if (isOpen) {
+      mobileMenu?.classList.remove("open");
+      mobileMenuButton?.classList.remove("active");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    } else {
+      mobileMenu?.classList.add("open");
+      mobileMenuButton?.classList.add("active");
+      mobileMenuButton?.setAttribute("aria-expanded", "true");
+      document.body.style.overflow = "hidden";
+    }
+  });
+
+  // Close mobile menu on link click
+  mobileNavLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      mobileMenu?.classList.remove("open");
+      mobileMenuButton?.classList.remove("active");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    });
+  });
+
+  // Close on escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && mobileMenu?.classList.contains("open")) {
+      mobileMenu?.classList.remove("open");
+      mobileMenuButton?.classList.remove("active");
+      mobileMenuButton?.setAttribute("aria-expanded", "false");
+      document.body.style.overflow = "";
+    }
+  });
+</script>
+
