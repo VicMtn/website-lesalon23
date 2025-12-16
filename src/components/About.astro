@@ -1,0 +1,130 @@
+---
+import { siteConfig } from "../config/site.config";
+import Button from "./Button.astro";
+---
+
+<section id="about" class="section-padding bg-secondary-50 relative overflow-hidden">
+  <!-- Élément décoratif -->
+  <div class="absolute top-0 right-0 w-96 h-96 bg-primary-100 rounded-full blur-3xl opacity-40 -translate-y-1/2 translate-x-1/2"></div>
+  
+  <div class="container-custom relative z-10">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Images -->
+      <div class="relative">
+        <div class="grid grid-cols-2 gap-4">
+          <!-- Image principale -->
+          <div class="col-span-2 sm:col-span-1 sm:row-span-2">
+            <img
+              src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&q=80"
+              alt="Notre salon de coiffure"
+              class="w-full h-64 sm:h-full object-cover rounded-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+          <!-- Images secondaires -->
+          <div class="hidden sm:block">
+            <img
+              src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?w=400&q=80"
+              alt="Coiffeuse au travail"
+              class="w-full h-40 object-cover rounded-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+          <div class="hidden sm:block">
+            <img
+              src="https://images.unsplash.com/photo-1562322140-8baeececf3df?w=400&q=80"
+              alt="Détail coiffure"
+              class="w-full h-40 object-cover rounded-2xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        
+        <!-- Badge flottant -->
+        <div class="absolute -bottom-6 -right-6 md:right-10 bg-primary-500 text-white p-6 rounded-2xl shadow-xl">
+          <div class="text-center">
+            <span class="block text-4xl font-heading font-bold">14+</span>
+            <span class="text-sm text-primary-100">ans d'expérience</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contenu texte -->
+      <div class="lg:pl-8">
+        <!-- Label -->
+        <span class="inline-flex items-center gap-2 text-primary-600 font-medium text-sm uppercase tracking-widest mb-4">
+          <span class="w-8 h-px bg-primary-400"></span>
+          À propos de nous
+        </span>
+
+        <h2 class="font-heading text-4xl sm:text-5xl text-secondary-900 mb-6">
+          Un salon où l'élégance rencontre l'<span class="text-primary-500 italic">expertise</span>
+        </h2>
+
+        <p class="text-secondary-600 text-lg leading-relaxed mb-6">
+          Depuis 2010, <strong class="text-secondary-800">{siteConfig.name}</strong> s'engage à révéler la beauté unique de chaque client. Notre équipe de coiffeurs passionnés allie savoir-faire traditionnel et techniques modernes pour créer des looks personnalisés qui vous ressemblent.
+        </p>
+
+        <p class="text-secondary-600 text-lg leading-relaxed mb-8">
+          Dans un cadre chaleureux et raffiné, nous vous offrons une expérience sur-mesure, du diagnostic capillaire jusqu'à la touche finale. Parce que vous méritez ce qu'il y a de mieux.
+        </p>
+
+        <!-- Points forts -->
+        <div class="grid sm:grid-cols-2 gap-4 mb-10">
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-secondary-800">Produits premium</h4>
+              <p class="text-sm text-secondary-500">Marques professionnelles</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-secondary-800">Équipe certifiée</h4>
+              <p class="text-sm text-secondary-500">Formation continue</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-secondary-800">Conseil personnalisé</h4>
+              <p class="text-sm text-secondary-500">À votre écoute</p>
+            </div>
+          </div>
+          
+          <div class="flex items-start gap-3">
+            <div class="flex-shrink-0 w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
+              <svg class="w-5 h-5 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="font-semibold text-secondary-800">Ambiance cosy</h4>
+              <p class="text-sm text-secondary-500">Détente garantie</p>
+            </div>
+          </div>
+        </div>
+
+        <Button href={siteConfig.bookingUrl} variant="primary" size="lg">
+          Prendre rendez-vous
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>
+
