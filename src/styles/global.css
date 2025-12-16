@@ -183,3 +183,19 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0 2rem;
   }
 }
+
+/* === OVERLAY GRADIENT === */
+.overlay-gradient {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.4) 0%,
+    rgba(0, 0, 0, 0.2) 50%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+}
+
+/* === FOCUS STYLES === */
+*:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
