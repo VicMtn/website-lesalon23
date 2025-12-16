@@ -1,1 +1,45 @@
 @import "tailwindcss";
+
+/* === VARIABLES CSS - CHARTE GRAPHIQUE === */
+@theme {
+  /* Couleur Principale - Violet */
+  --color-primary-50: oklch(0.9825 0.0061 317.75);
+  --color-primary-100: oklch(0.9602 0.0102 311.18);
+  --color-primary-200: oklch(0.927 0.021 313.83);
+  --color-primary-300: oklch(0.8686 0.0369 314.62);
+  --color-primary-400: oklch(0.8127 0.0532 314.89);
+  --color-primary-500: oklch(0.6911 0.0881 315.71);
+  --color-primary-600: oklch(0.611 0.1018 315.6);
+  --color-primary-700: oklch(0.5385 0.0964 315.94);
+  --color-primary-800: oklch(0.4771 0.0806 316.77);
+  --color-primary-900: oklch(0.4143 0.0653 317.19);
+
+  /* Couleur Secondaire - Brun chaud */
+  --color-secondary-50: oklch(0.9801 0.0034 67.78);
+  --color-secondary-100: oklch(0.9536 0.0091 78.28);
+  --color-secondary-200: oklch(0.9003 0.0196 80.11);
+  --color-secondary-300: oklch(0.8293 0.0326 78.12);
+  --color-secondary-400: oklch(0.7379 0.0471 72.45);
+  --color-secondary-500: oklch(0.6518 0.0548 63.72);
+  --color-secondary-600: oklch(0.6034 0.0557 61.62);
+  --color-secondary-700: oklch(0.527 0.0481 56.03);
+  --color-secondary-800: oklch(0.4595 0.039 51.69);
+  --color-secondary-900: oklch(0.4038 0.031 49.19);
+
+  /* Couleur Accent - Rose poudré */
+  --color-accent-50: oklch(98.5% 0 0);
+  --color-accent-100: oklch(97% 0 0);
+  --color-accent-200: oklch(92.2% 0 0);
+  --color-accent-300: oklch(87% 0 0);
+  --color-accent-400: oklch(70.8% 0 0);
+  --color-accent-500: oklch(55.6% 0 0);
+  --color-accent-600: oklch(43.9% 0 0);
+  --color-accent-700: oklch(37.1% 0 0);
+  --color-accent-800: oklch(26.9% 0 0);
+  --color-accent-900: oklch(20.5% 0 0);
+
+  /* Polices */
+  --font-heading: 'Cormorant Garamond', serif;
+  --font-body: 'Outfit', sans-serif;
+}
+
