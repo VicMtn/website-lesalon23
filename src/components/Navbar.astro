@@ -42,6 +42,7 @@ import Button from "./Button.astro";
         id="mobile-menu-button"
         class="lg:hidden flex flex-col gap-1.5 p-2 group"
         aria-label="Ouvrir le menu"
+        aria-controls="mobile-menu"
         aria-expanded="false"
       >
         <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
@@ -56,6 +57,14 @@ import Button from "./Button.astro";
     id="mobile-menu"
     class="lg:hidden fixed inset-0 z-50 bg-primary-600 text-white pt-24 pb-10 transition-transform duration-300 ease-out translate-x-full pointer-events-none overflow-y-auto"
   >
+    <button
+      id="mobile-menu-close"
+      type="button"
+      class="absolute top-5 right-5 p-3 rounded-md text-white/90 hover:text-white hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/60"
+      aria-label="Fermer le menu"
+    >
+      <span aria-hidden="true" class="block text-3xl leading-none">&times;</span>
+    </button>
     <div class="flex flex-col items-center justify-start min-h-full gap-6 px-8">
       {navigationConfig.map((item) => (
         <a
@@ -92,6 +101,7 @@ import Button from "./Button.astro";
 <script is:inline>
   const menuBtn = document.getElementById("mobile-menu-button");
   const menu = document.getElementById("mobile-menu");
+  const closeBtn = document.getElementById("mobile-menu-close");
 
   if (!menuBtn || !menu) {
     // Fail-safe: if markup changes, don't crash the page.
@@ -110,6 +120,9 @@ import Button from "./Button.astro";
       const open = !menuBtn.classList.contains("active");
       setOpen(open);
     });
+
+    // Close button
+    closeBtn?.addEventListener("click", () => setOpen(false));
 
     // Close on nav link click
     menu.addEventListener("click", (e) => {
