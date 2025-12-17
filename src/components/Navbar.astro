@@ -44,6 +44,7 @@ import Button from "./Button.astro";
         class="lg:hidden flex flex-col gap-1.5 p-2 group"
         aria-label="Ouvrir le menu"
         aria-controls="mobile-menu"
+        aria-haspopup="dialog"
         aria-expanded="false"
       >
         <span class="hamburger-line w-6 h-0.5 bg-white transition-all duration-300 origin-center"></span>
@@ -57,7 +58,12 @@ import Button from "./Button.astro";
   <div
     id="mobile-menu"
     class="lg:hidden fixed inset-0 z-50 bg-primary-600 text-white pt-24 pb-10 transition-transform duration-300 ease-out translate-x-full pointer-events-none overflow-y-auto"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="mobile-menu-title"
   >
+    <h2 id="mobile-menu-title" class="sr-only">Menu</h2>
     <button
       id="mobile-menu-close"
       type="button"
@@ -113,6 +119,7 @@ import Button from "./Button.astro";
       menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
       menu.classList.toggle("translate-x-full", !open);
       menu.classList.toggle("pointer-events-none", !open);
+      menu.setAttribute("aria-hidden", open ? "false" : "true");
       document.body.style.overflow = open ? "hidden" : "";
     };
     const close = () => setOpen(false);
