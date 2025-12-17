@@ -40,6 +40,7 @@ import Button from "./Button.astro";
       <!-- Bouton Menu Mobile -->
       <button
         id="mobile-menu-button"
+        type="button"
         class="lg:hidden flex flex-col gap-1.5 p-2 group"
         aria-label="Ouvrir le menu"
         aria-controls="mobile-menu"
@@ -114,31 +115,28 @@ import Button from "./Button.astro";
       menu.classList.toggle("pointer-events-none", !open);
       document.body.style.overflow = open ? "hidden" : "";
     };
+    const close = () => setOpen(false);
 
     // Toggle menu
     menuBtn.addEventListener("click", () => {
-      const open = !menuBtn.classList.contains("active");
-      setOpen(open);
+      setOpen(menuBtn.classList.contains("active") ? false : true);
     });
 
     // Close button
-    closeBtn?.addEventListener("click", () => setOpen(false));
+    closeBtn?.addEventListener("click", close);
 
     // Close on nav link click
     menu.addEventListener("click", (e) => {
-      const target = e.target;
-      if (target && target.closest && target.closest(".mobile-nav-link")) {
-        setOpen(false);
-      }
+      if (e.target?.closest?.(".mobile-nav-link")) close();
     });
 
     // Close on Escape
     document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") setOpen(false);
+      if (e.key === "Escape") close();
     });
 
     // Ensure correct initial state (e.g. if user navigates with bfcache)
-    setOpen(false);
+    close();
   }
 </script>
 
