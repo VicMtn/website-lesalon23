@@ -3,7 +3,7 @@ import { siteConfig, navigationConfig } from "../config/site.config";
 import Button from "./Button.astro";
 ---
 
-<header id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+<header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-primary-600 shadow-lg">
   <nav class="container-custom">
     <div class="flex items-center justify-between h-20">
       <!-- Logo -->
@@ -54,19 +54,18 @@ import Button from "./Button.astro";
   <!-- Menu Mobile -->
   <div
     id="mobile-menu"
-    class="lg:hidden fixed inset-0 top-20 bg-secondary-900/98 backdrop-blur-lg transform translate-x-full transition-transform duration-300 ease-in-out"
+    class="lg:hidden fixed inset-0 z-50 bg-primary-600 text-white pt-24 pb-10 transition-transform duration-300 ease-out translate-x-full pointer-events-none overflow-y-auto"
   >
-    <div class="flex flex-col items-center justify-center h-full gap-6 p-8">
-      {navigationConfig.map((item, index) => (
+    <div class="flex flex-col items-center justify-start min-h-full gap-6 px-8">
+      {navigationConfig.map((item) => (
         <a
           href={item.href}
-          class="mobile-nav-link text-2xl font-heading text-white hover:text-primary-300 transition-colors opacity-0"
-          style={`animation-delay: ${index * 0.1}s`}
+          class="mobile-nav-link text-2xl font-heading text-white hover:text-primary-300 transition-colors"
         >
           {item.label}
         </a>
       ))}
-      <div class="mt-8 opacity-0 mobile-nav-link" style="animation-delay: 0.6s">
+      <div class="mt-8">
         <Button href={siteConfig.bookingUrl} variant="primary" size="lg">
           Réserver maintenant
         </Button>
@@ -76,20 +75,6 @@ import Button from "./Button.astro";
 </header>
 
 <style>
-  #navbar {
-    background: transparent;
-  }
-
-  #navbar.scrolled {
-    background: var(--color-secondary-900);
-    backdrop-filter: blur(12px);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  }
-
-  #navbar.scrolled .nav-link {
-    color: var(--color-accent-50);
-  }
-
   /* Animation du menu hamburger */
   #mobile-menu-button.active .hamburger-line:nth-child(1) {
     transform: translateY(8px) rotate(45deg);
@@ -97,87 +82,50 @@ import Button from "./Button.astro";
 
   #mobile-menu-button.active .hamburger-line:nth-child(2) {
     opacity: 0;
-    transform: scaleX(0);
   }
 
   #mobile-menu-button.active .hamburger-line:nth-child(3) {
     transform: translateY(-8px) rotate(-45deg);
   }
-
-  /* Menu mobile ouvert */
-  #mobile-menu.open {
-    transform: translateX(0);
-  }
-
-  #mobile-menu.open .mobile-nav-link {
-    animation: slideIn 0.4s ease-out forwards;
-  }
-
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(30px);
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0);
-    }
-  }
 </style>
 
-<script>
-  const navbar = document.getElementById("navbar");
-  const mobileMenuButton = document.getElementById("mobile-menu-button");
-  const mobileMenu = document.getElementById("mobile-menu");
-  const mobileNavLinks = document.querySelectorAll(".mobile-nav-link");
+<script is:inline>
+  const menuBtn = document.getElementById("mobile-menu-button");
+  const menu = document.getElementById("mobile-menu");
 
-  // Scroll effect
-  function handleScroll() {
-    if (window.scrollY > 50) {
-      navbar?.classList.add("scrolled");
-    } else {
-      navbar?.classList.remove("scrolled");
-    }
-  }
+  if (!menuBtn || !menu) {
+    // Fail-safe: if markup changes, don't crash the page.
+    console.warn("[Navbar] mobile menu elements not found");
+  } else {
+    const setOpen = (open) => {
+      menuBtn.classList.toggle("active", open);
+      menuBtn.setAttribute("aria-expanded", open ? "true" : "false");
+      menu.classList.toggle("translate-x-full", !open);
+      menu.classList.toggle("pointer-events-none", !open);
+      document.body.style.overflow = open ? "hidden" : "";
+    };
 
-  window.addEventListener("scroll", handleScroll);
-  handleScroll(); // Check on load
-
-  // Mobile menu toggle
-  mobileMenuButton?.addEventListener("click", () => {
-    const isOpen = mobileMenu?.classList.contains("open");
-    
-    if (isOpen) {
-      mobileMenu?.classList.remove("open");
-      mobileMenuButton?.classList.remove("active");
-      mobileMenuButton?.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    } else {
-      mobileMenu?.classList.add("open");
-      mobileMenuButton?.classList.add("active");
-      mobileMenuButton?.setAttribute("aria-expanded", "true");
-      document.body.style.overflow = "hidden";
-    }
-  });
-
-  // Close mobile menu on link click
-  mobileNavLinks.forEach((link) => {
-    link.addEventListener("click", () => {
-      mobileMenu?.classList.remove("open");
-      mobileMenuButton?.classList.remove("active");
-      mobileMenuButton?.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
+    // Toggle menu
+    menuBtn.addEventListener("click", () => {
+      const open = !menuBtn.classList.contains("active");
+      setOpen(open);
     });
-  });
 
-  // Close on escape
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape" && mobileMenu?.classList.contains("open")) {
-      mobileMenu?.classList.remove("open");
-      mobileMenuButton?.classList.remove("active");
-      mobileMenuButton?.setAttribute("aria-expanded", "false");
-      document.body.style.overflow = "";
-    }
-  });
+    // Close on nav link click
+    menu.addEventListener("click", (e) => {
+      const target = e.target;
+      if (target && target.closest && target.closest(".mobile-nav-link")) {
+        setOpen(false);
+      }
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") setOpen(false);
+    });
+
+    // Ensure correct initial state (e.g. if user navigates with bfcache)
+    setOpen(false);
+  }
 </script>
 
