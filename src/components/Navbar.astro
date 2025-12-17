@@ -1,6 +1,9 @@
 ---
 import { siteConfig, navigationConfig } from "../config/site.config";
 import Button from "./Button.astro";
+
+const phoneNumber = siteConfig.contact.phone;
+const phoneHref = `tel:${phoneNumber.replace(/[^+\d]/g, "")}`;
 ---
 
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-primary-600 shadow-lg">
@@ -82,7 +85,7 @@ import Button from "./Button.astro";
         </a>
       ))}
       <div class="mt-8">
-        <Button href={siteConfig.bookingUrl} variant="primary" size="lg">
+        <Button href={phoneHref} variant="primary" size="lg">
           Réserver maintenant
         </Button>
       </div>
